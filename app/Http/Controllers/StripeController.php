@@ -75,7 +75,7 @@ class StripeController extends Controller
         $response = $stripe->checkout->sessions->create([
             'line_items' => $lineitems,
             'mode' => 'payment',
-            'success_url' => route('success'),
+            'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('cancel'),
         ]);
 
@@ -112,7 +112,7 @@ class StripeController extends Controller
         $response = $stripe->checkout->sessions->create([
             'line_items' => $lineitems,
             'mode' => 'payment',
-            'success_url' => route('success'),
+            'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('cancel'),
         ]);
 
@@ -128,6 +128,7 @@ class StripeController extends Controller
 
     public function success(Request $request)
     {
+        if (isset($request->session_id)) {
             $stripe = new StripeClient(config('stripe.stripe_sk'));
             $response = $stripe->checkout->sessions->retrieve($request->session_id);
 
@@ -145,6 +146,9 @@ class StripeController extends Controller
             }
 
             return redirect('/')->with('Payment_success', 'Payment Successful! Order confirmed');
+        } else {
+            return redirect()->route('cancel');
+        }
     }
 
     public function cancel()
