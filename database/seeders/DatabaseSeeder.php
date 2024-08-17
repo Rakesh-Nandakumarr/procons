@@ -23,10 +23,11 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('87654321'),
         ]);
 
-        // create 10 categories with 10 products for each category
-        Category::factory(10)->create()->each(function ($category) {
-            Product::factory(10)->create(['category_id' => $category->id]);
-        });
+        // call the CategorySeeder
+        $this->call(CategorySeeder::class);
+
+        // call the ProductSeeder
+        $this->call(ProductSeeder::class);
         
     }
 }

@@ -18,9 +18,6 @@ class Category extends Model
         'description',
         'parent_id',
         'status',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
     ];
 
     public function products(): HasMany

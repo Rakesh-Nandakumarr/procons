@@ -22,9 +22,6 @@ class CategoryFactory extends Factory
             'description' => $this->faker->words(1000, true),
             'parent_id' => null,
             'status' => $this->faker->boolean(),
-            'meta_title' => $this->faker->sentence,
-            'meta_description' => $this->faker->sentence,
-            'meta_keywords' => $this->faker->sentence,
         ];
     }
 }

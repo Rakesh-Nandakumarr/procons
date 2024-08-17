@@ -18,9 +18,6 @@ return new class extends Migration
             $table->longText('description');
             $table->foreignId('parent_id')->nullable();
             $table->boolean('status')->default(false);
-            $table->string('meta_title')->nullable();
-            $table->string('meta_description')->nullable();
-            $table->string('meta_keywords')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
