@@ -22,5 +22,5 @@ Route::middleware([
     Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products/{slug}', [HomeController::class, 'show'])->name('products.show');
