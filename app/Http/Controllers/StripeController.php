@@ -145,7 +145,7 @@ class StripeController extends Controller
                 }
             }
 
-            return redirect('/')->with('Payment_success', 'Payment Successful! Order confirmed');
+            return redirect('/my-orders')->with('Payment_success', 'Payment Successful! Order confirmed');
         } else {
             return redirect()->route('cancel');
         }
@@ -153,6 +153,6 @@ class StripeController extends Controller
 
     public function cancel()
     {
-        return redirect('/')->with('Payment_cancel', 'Payment Cancelled');
+        return redirect('/my-orders')->with('Payment_cancel', 'Payment Cancelled');
     }
 }

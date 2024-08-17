@@ -23,4 +23,13 @@ class HomeController extends Controller
     {
         return view('cart');
     }
+
+    public function show($slug)
+    {
+        $product = Product::where('slug', $slug)
+            ->where('status', 1)
+            ->firstOrFail();
+
+        return view('product.show', compact('product'));
+    }
 }

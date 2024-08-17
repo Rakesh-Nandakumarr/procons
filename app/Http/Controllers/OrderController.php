@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function index()
     {
 
-        // pass only the logged user's orders to the view
+        // passing only the logged user's orders to the view and sort them by created_at and payment_status in descending order
         $userOrders = auth()->user()->orders()->paginate(10)->sortByDesc('created_at');
 
         return view('order.index', [
@@ -31,11 +31,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request) {}
-
-    /**
      * Display the specified resource.
      */
     public function show(Order $order)
@@ -46,29 +41,5 @@ class OrderController extends Controller
         $products = $cart ? $cart->products : collect();
 
         return view('order.show', compact('order', 'products'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
     }
 }

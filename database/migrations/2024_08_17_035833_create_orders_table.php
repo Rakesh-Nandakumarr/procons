@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('billing_district');
             $table->string('billing_phone');
 
-            $table->enum('payment_status', ['Unpaid', 'Paid'])->default('Unpaid');
+            $table->enum('payment_status', ['Unpaid', 'Paid', 'Cancelled'])->default('Unpaid');
             $table->enum('shipping_status', ['Pending', 'Processing', 'Shipped', 'Cancelled', 'Delivered'])->default('Pending');
 
             $table->float('shipping_total')->default(0);
