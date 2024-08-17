@@ -12,7 +12,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'auth'
 ])->group(function () {
-    Route::get('/dashboard', [OrderController::class, 'index'])->name('dashboard');
+    Route::get('/my-orders', [OrderController::class, 'index'])->name('order.index');
     Route::get('cart', [HomeController::class, 'cart'])->name('cart');
     Route::get('/order/create', [OrderController::class, 'create']);
     Route::post('stripe', [StripeController::class, 'stripe'])->name('stripe');
@@ -22,5 +22,5 @@ Route::middleware([
     Route::get('order/{order}', [OrderController::class, 'show'])->name('order.show');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::get('products/{slug}', [ProductController::class, 'show'])->name('products.show');

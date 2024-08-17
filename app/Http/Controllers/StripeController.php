@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\Cart;
 use App\Models\Order;
+use Stripe\StripeClient;
 
 class StripeController extends Controller
 {
@@ -70,11 +71,11 @@ class StripeController extends Controller
                 ];
         }
 
-        $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+        $stripe = new StripeClient(config('stripe.stripe_sk'));
         $response = $stripe->checkout->sessions->create([
             'line_items' => $lineitems,
             'mode' => 'payment',
-            'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('success'),
             'cancel_url' => route('cancel'),
         ]);
 
@@ -107,11 +108,11 @@ class StripeController extends Controller
                 ];
         }
 
-        $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+        $stripe = new StripeClient(config('stripe.stripe_sk'));
         $response = $stripe->checkout->sessions->create([
             'line_items' => $lineitems,
             'mode' => 'payment',
-            'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('success'),
             'cancel_url' => route('cancel'),
         ]);
 
@@ -127,8 +128,7 @@ class StripeController extends Controller
 
     public function success(Request $request)
     {
-        if (isset($request->session_id)) {
-            $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+            $stripe = new StripeClient(config('stripe.stripe_sk'));
             $response = $stripe->checkout->sessions->retrieve($request->session_id);
 
             // Retrieve the order ID from the session
@@ -139,21 +139,16 @@ class StripeController extends Controller
                 $order = Order::find($order_id);
                 if ($order) {
                     $order->update(['payment_status' => 'Paid']);
-                    // get the cart of the order
                     $cart = Cart::find($order->cart_id);
-                    // make the cart is_paid to true
                     $cart->update(['is_paid' => true]);
                 }
             }
 
-            return redirect()->route('home')->with('Payment_success', 'Payment Successful! Order confirmed');
-        } else {
-            return redirect()->route('cancel');
-        }
+            return redirect('/')->with('Payment_success', 'Payment Successful! Order confirmed');
     }
 
     public function cancel()
     {
-        return redirect()->route('home')->with('Payment_cancel', 'Payment Cancelled');
+        return redirect('/')->with('Payment_cancel', 'Payment Cancelled');
     }
 }

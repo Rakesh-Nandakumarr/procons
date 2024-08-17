@@ -28,10 +28,8 @@ return new class extends Migration {
             $table->string('billing_district');
             $table->string('billing_phone');
 
-            $table->string('payment_status')->default('Not paid');
-
-            $table->string('shipping_status')->default('Pending');
-
+            $table->enum('payment_status', ['Unpaid', 'Paid'])->default('Unpaid');
+            $table->enum('shipping_status', ['Pending', 'Processing', 'Shipped', 'Cancelled', 'Delivered'])->default('Pending');
 
             $table->float('shipping_total')->default(0);
             $table->string('total_discount')->default(0);

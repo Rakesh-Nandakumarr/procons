@@ -15,7 +15,7 @@ class OrderController extends Controller
     {
 
         // pass only the logged user's orders to the view
-        $userOrders = auth()->user()->orders()->paginate(10)->orderBy('created_at', 'desc');
+        $userOrders = auth()->user()->orders()->paginate(10)->sortByDesc('created_at');
 
         return view('order.index', [
             'orders' => $userOrders

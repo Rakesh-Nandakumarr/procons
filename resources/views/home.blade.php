@@ -38,12 +38,14 @@
                         @endforeach
                     </div>
                 </template>
-                <div class="mt-4 flex justify-center">
-                    <button @click="showMore = !showMore"
-                        class="px-6 py-3 bg-gray-300 text-gray-900 text-sm font-semibold rounded hover:bg-gray-400 transition duration-200">
-                        <span x-text="showMore ? 'Show Less' : 'Show More'"></span>
-                    </button>
-                </div>
+                @if ($category->products->count() > 4)
+                    <div class="mt-4 flex justify-center">
+                        <button @click="showMore = !showMore"
+                            class="px-6 py-3 bg-gray-300 text-gray-900 text-sm font-semibold rounded hover:bg-gray-400 transition duration-200">
+                            <span x-text="showMore ? 'Show Less' : 'Show More'"></span>
+                        </button>
+                    </div>
+                @endif
             </div>
         @endforeach
     </div>
