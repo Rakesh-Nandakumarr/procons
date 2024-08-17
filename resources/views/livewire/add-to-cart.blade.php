@@ -60,50 +60,7 @@ $addToCart = function () {
 
 ?>
 
-<div x-data="{
-    product: @entangle('product'),
-    quantity: @entangle('quantity'),
-    cart: @entangle('cart'),
-    stock: @entangle('stock'),
-    decrement() {
-        if (this.quantity > 1) {
-            this.quantity--;
-        }
-    },
-    increment() {
-        if (this.quantity < this.stock) {
-            this.quantity++;
-        } else {
-            this.quantity = this.stock;
-            alert('Cannot add more than available stock.');
-        }
-    },
-    validateQuantity() {
-        // Convert quantity to a number and ensure it's a valid integer
-        let qty = parseInt(this.quantity);
-
-        if (isNaN(qty) || qty < 1) {
-            this.quantity = 1;
-        } else if (qty > this.stock) {
-            this.quantity = this.stock;
-            alert('Cannot add more than available stock.');
-        } else {
-            this.quantity = qty;
-        }
-    }
-}" x-init="$watch('quantity', validateQuantity)">
-    <div class="flex justify-between items-center">
-        <div class="flex items-center">
-            <button x-on:click="decrement" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded">
-                -
-            </button>
-            <input type="text" x-model="quantity" class="px-4 py-2 w-20 bg-gray-200 text-center border-2 border-black"
-                @change="validateQuantity">
-            <button x-on:click="increment" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded">
-                +
-            </button>
-        </div>
-    </div>
+<div>
     <div class="mt-5">
         @auth()
             <button wire:click="addToCart"

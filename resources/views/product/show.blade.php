@@ -18,7 +18,7 @@
 
                 <!-- Availability Status -->
                 <div class="flex items-center mb-6">
-                    @if ($product->quantity > 0)
+                    @if ($product->stock > 0)
                         <span class="text-sm text-gray-600 mr-2">In Stock</span>
                         <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">

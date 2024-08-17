@@ -12,6 +12,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'auth'
 ])->group(function () {
+    Route::get('/dashboard', function () {
+        return redirect('/');
+    })->name('dashboard');
     Route::get('/my-orders', [OrderController::class, 'index'])->name('order.index');
     Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
     Route::get('/order/create', [OrderController::class, 'create']);

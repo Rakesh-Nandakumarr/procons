@@ -24,7 +24,6 @@ class ProductFactory extends Factory
             'meta_title' => $this->faker->sentence,
             'meta_description' => $this->faker->sentence,
             'meta_keywords' => $this->faker->sentence,
-            'quantity' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->randomFloat(2, 1, 1000),
             'status' => $this->faker->boolean(),
             'stock' => $this->faker->numberBetween(1, 100),

@@ -21,7 +21,6 @@ class Product extends Model
         'meta_title',
         'meta_description',
         'meta_keywords',
-        'quantity',
         'price',
         'status',
         'stock',

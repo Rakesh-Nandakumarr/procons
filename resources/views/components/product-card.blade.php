@@ -11,7 +11,7 @@
     </div>
     <div class="p-4 bg-gray-100 flex justify-between items-center">
         <div class="flex items-center">
-            @if ($product->quantity > 0)
+            @if ($product->stock > 0)
                 <span class="text-sm text-gray-600">In Stock</span>
                 <svg class="w-5 h-5 text-green-500 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -25,7 +25,7 @@
         </div>
         <button 
             class="bg-gray-900 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-gray-800 transition duration-200" 
-            @if ($product->quantity === 0) 
+            @if ($product->stock == 0) 
                 disabled 
             @endif
         >

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('meta_keywords')->nullable();
-            $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->boolean('status')->default(false);
             $table->string('thumbnail')->nullable();
