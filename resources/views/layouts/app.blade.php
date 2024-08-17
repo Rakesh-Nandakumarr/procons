@@ -6,6 +6,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ $metaTitle ?: 'ProconShop' }}</title>
+        <meta name="author" content="Rakesh">
+        <meta name="description" content="{{ $metaDescription }}">
+        <meta name="keywords" content="{{ $metaKeywords }}">
+        <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,8 +22,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased relative bg-cover bg-no-repeat bg-fixed"
-            style="background-image: url('{{ asset('images/background.jpg') }}');">
+    <body class="font-sans antialiased relative">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">

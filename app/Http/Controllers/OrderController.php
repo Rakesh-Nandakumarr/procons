@@ -14,8 +14,8 @@ class OrderController extends Controller
     public function index()
     {
 
-        // passing only the logged user's orders to the view and sort them by created_at and payment_status in descending order
-        $userOrders = auth()->user()->orders()->paginate(10)->sortByDesc('created_at');
+        // passing only the logged user's orders to the view and sort them by created_at
+        $userOrders = auth()->user()->orders()->orderBy('created_at', 'desc')->paginate(10);
 
         return view('order.index', [
             'orders' => $userOrders

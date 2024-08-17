@@ -1,4 +1,4 @@
-<a href="{{ route('products.show', $product->slug) }}" class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 block">
+<div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 block">
     <div class="bg-gray-200">
         <img class="w-full h-56 object-cover" src="{{ $product->getThumbnail() }}" alt="{{ $product->name }}">
     </div>
@@ -23,13 +23,9 @@
                 </svg>
             @endif
         </div>
-        <button 
-            class="bg-gray-900 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-gray-800 transition duration-200" 
-            @if ($product->stock == 0) 
-                disabled 
-            @endif
-        >
-            Add to Cart
-        </button>
+        <a href="{{ route('products.show', $product->slug) }}"
+            class="bg-gray-900 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-gray-800 transition duration-200" >
+            show details
+        </a>
     </div>
-</a>
+</div>

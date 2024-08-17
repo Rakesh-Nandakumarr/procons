@@ -75,7 +75,7 @@ on(['cartRefresh' => function () {
                                     <div class="ml-4">
                                         <h4 class="text-sm font-medium text-gray-900">{{ $product->name }}</h4>
                                         <p class="mt-1 text-sm text-gray-500">{{ $product->pivot->quantity }} x
-                                            LKR {{ number_format($product->price, 2) }}
+                                            $ {{ number_format($product->price, 2) }}
                                         </p>
                                     </div>
                                     <button wire:click="removeProduct({{ $product->id }})"
@@ -90,7 +90,7 @@ on(['cartRefresh' => function () {
                             @endforeach
                             <div class="flex gap-5">
                                 <p class="ml-auto text-sm font-semibold text-gray-800">
-                                    LKR {{ number_format($cart->total, 2) }}
+                                    $ {{ number_format($cart->total, 2) }}
                                 </p>
                                 <a href="/cart" class="text-sm font-semibold text-indigo-600">
                                     View Cart

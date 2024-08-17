@@ -54,7 +54,7 @@ on([
                     <div class="ml-4 flex-1">
                         <h4 class="text-lg font-medium text-gray-800">{{ $product->name }}</h4>
                         <p class="mt-1 text-sm text-gray-600">{{ $product->pivot->quantity }} x
-                            LKR {{ number_format($product->price, 2) }}
+                            $ {{ number_format($product->price, 2) }}
                         </p>
                     </div>
                     <button wire:click="removeProduct({{ $product->id }})"
@@ -68,7 +68,7 @@ on([
             @endforeach
             <div class="mt-6">
                 <p class="text-lg font-semibold text-gray-800">
-                    Total: LKR {{ number_format($cart->total, 2) }}
+                    Total: $ {{ number_format($cart->total, 2) }}
                 </p>
                 <br>
                 <a href="/order/create"

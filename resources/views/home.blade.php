@@ -1,31 +1,38 @@
 <x-app-layout>
     <!-- Hero Section -->
-    <div class="bg-white px-6 py-16">
-        <div class="text-center lg:text-left">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">Welcome to <span class="text-indigo-600">ProconShop</span>
-            </h2>
-            <p class="text-lg text-gray-600 mb-8">Discover premium products curated just for you. ProconShop brings you the
-                latest in fashion, electronics, home decor, and more.</p>
-            <div class="flex justify-center lg:justify-start space-x-4">
-                <a class="px-6 py-3 bg-indigo-600 text-white text-sm font-semibold rounded hover:bg-indigo-700 transition duration-200"
-                    href="/shop">Shop Now</a>
-                <a class="px-6 py-3 bg-gray-300 text-gray-900 text-sm font-semibold rounded hover:bg-gray-400 transition duration-200"
-                    href="/about-us">Learn More</a>
+    <section class="relative bg-gray-100 text-gray-900 overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://img.freepik.com/free-vector/gradient-template-background-new-minimalist_483537-4975.jpg?t=st=1723932341~exp=1723935941~hmac=2000c172ed58879c10b8185c6a44510c5d67854be0b534e4999dd7981506a7bf&w=1060');"></div>
+        <div class="relative z-10 container mx-auto flex flex-col lg:flex-row items-center justify-center h-screen px-6 py-12 md:px-12 md:py-24">
+            <div class="flex flex-col items-center lg:items-start lg:w-1/2 text-center lg:text-left">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+                    Welcome to <span class="text-indigo-600">ProconShop</span>!
+                </h1>
+                <p class="text-lg md:text-xl mb-6 leading-relaxed">
+                    Discover a curated selection of high-quality products tailored to meet all your needs. From the latest fashion trends to cutting-edge electronics and home essentials, ProconShop is your ultimate destination for exceptional value and service.
+                </p>
+                <div class="flex flex-col md:flex-row md:justify-start gap-4">
+                    <a href="#our-products" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-lg text-lg font-semibold transition duration-300 ease-in-out">
+                        Start Shopping
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="bg-gray-100 py-12">
+    <!-- Our Products Section -->
+    <div id="our-products" class="bg-white py-12">
         <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold text-gray-800">Our Products</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Products</h2>
+            <p class="text-lg text-gray-600 mb-12">Explore our diverse range of products and find exactly what you're looking for.</p>
         </div>
     </div>
 
     @livewire('search')
+
     <div class="container mx-auto py-12 max-w-7xl">
         @foreach ($categories as $category)
             <div class="mb-12" x-data="{ showMore: false }">
-                <h3 class="text-3xl font-bold text-gray-800 mb-6">{{ $category->name }}</h3>
+                <h3 class="text-3xl font-bold text-gray-900 mb-6">{{ $category->name }}</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     @foreach ($category->products->take(4) as $product)
                         <x-product-card :product="$product" />

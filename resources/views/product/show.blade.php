@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :metaTitle="$product->meta_title ?: $product->title" :metaDescription="$product->meta_description" :metaKeywords="$product->meta_keywords ?: $product->title">
     <!-- Product Detail Section -->
     <div class="container mx-auto px-6 py-12">
         <div class="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
@@ -38,12 +38,6 @@
                 @livewire('product-add-to-cart', ['product' => $product], key($product->id))
 
             </div>
-        </div>
-
-        <!-- Product Description and Additional Info -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mt-8">
-
-            <!-- Additional product details or reviews can be included here -->
         </div>
     </div>
 
