@@ -17,7 +17,13 @@
                             {{ __('Home') }}
                         </x-nav-link>
                     </div>
-
+                    @if (auth()->user()->role == 'admin')
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link href="/" :active="request()->routeIs('admin')">
+                                {{ __('Admin Panel') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link href="{{ route('cart') }}" :active="request()->routeIs('cart')">
                             {{ __('My Cart') }}
