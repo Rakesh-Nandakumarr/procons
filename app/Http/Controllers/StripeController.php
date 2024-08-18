@@ -142,6 +142,11 @@ class StripeController extends Controller
                     $order->update(['payment_status' => 'Paid']);
                     $cart = Cart::find($order->cart_id);
                     $cart->update(['is_paid' => true]);
+                    // remove the stock from the products for that was ordered
+                    $products = $cart ? $cart->products : collect();
+                    foreach ($products  as $product){
+                        $product->update(['stock' => $product->stock - $product->pivot->quantity]);
+                    }
                 }
             }
 

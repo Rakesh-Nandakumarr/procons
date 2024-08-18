@@ -59,6 +59,12 @@
                             </tbody>
                         </table>
                     </div>
+                    @if ($order->payment_status == 'Unpaid')
+                        <a href="{{ route('pay', $order) }}"
+                            class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 transition ease-in-out duration-150 w-full text-center">
+                            Pay now
+                        </a>
+                    @endif
 
                     <div class="mt-4">
                         <a href="{{ route('order.index') }}"

@@ -79,7 +79,6 @@ $addToCart = function () {
         }
     },
     validateQuantity() {
-        // Convert quantity to a number and ensure it's a valid integer
         let qty = parseInt(this.quantity);
 
         if (isNaN(qty) || qty < 1) {
@@ -105,18 +104,19 @@ $addToCart = function () {
         </div>
     </div>
     <div class="mt-5">
-        @auth()
-            <button wire:click="addToCart"
-                class="bg-indigo-600 text-white text-sm font-semibold px-6 py-3 rounded hover:bg-indigo-700 transition duration-300"
-                @if ($product->stock == 0) disabled @endif>
-                Add to Cart
+        @if ($product->stock > 0)
+            <button
+                class="text-sm font-semibold px-6 py-3 rounded transition duration-300 bg-indigo-600 text-white hover:bg-indigo-700"
+                wire:click="addToCart">
+                {{ 'Add to Cart' }}
             </button>
         @else
-            <a href="{{ route('login') }}"
-                class="bg-red-600 text-white text-sm font-semibold px-6 py-3 rounded hover:bg-red-700 transition duration-300">
-                Login to Add to Cart
-            </a>
-        @endauth
+            <button
+                class="text-sm font-semibold px-6 py-3 rounded transition duration-300 bg-gray-400 text-gray-700 cursor-not-allowed">
+                {{ 'Out of Stock' }}
+            </button>
+        @endif
+
     </div>
 
     {{ $cart?->total }}

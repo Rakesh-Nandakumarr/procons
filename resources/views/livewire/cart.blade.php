@@ -4,7 +4,6 @@ use function Livewire\Volt\{state, mount, on};
 
 state([
     'cart' => null,
-    'showCart' => false,
 ]);
 
 mount(function () {
@@ -28,21 +27,8 @@ $removeProduct = function ($productId) {
     $cart->save();
 
     $this->cart = $cart;
-
-    // return redirect()->route('cart');
 };
 
-on([
-    'cartRefresh' => function () {
-        if (auth()->user()) {
-            $cart = auth()->user()->carts()->where('is_paid', false)->first();
-
-            $this->cart = $cart;
-
-            $this->showCart = true;
-        }
-    },
-]);
 ?>
 
 <div class="mt-6 bg-white shadow-md rounded-lg p-6">
