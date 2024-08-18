@@ -42,4 +42,9 @@ class OrderController extends Controller
 
         return view('order.show', compact('order', 'products'));
     }
+
+    public function render(Order $order)
+    {
+        return view('filament.pages.order-details', compact('order'));
+    }
 }

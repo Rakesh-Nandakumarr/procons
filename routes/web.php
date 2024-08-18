@@ -5,7 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StripeController;
-
+use App\Filament\Resources\OrderResource\Pages\OrderDetails;
+use App\Models\Order;
 
 Route::middleware([
     'auth:sanctum',
@@ -23,6 +24,8 @@ Route::middleware([
     Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
     Route::get('/pay/{order}', [StripeController::class, 'pay'])->name('pay');
     Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
+    Route::get('/order-details/{order}', [OrderController::class, 'render'])
+        ->name('filament.order.details');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

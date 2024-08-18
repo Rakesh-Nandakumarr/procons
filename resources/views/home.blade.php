@@ -22,17 +22,18 @@
     <!-- Our Products Section -->
     <div id="our-products" class="bg-white py-12">
         <div class="container mx-auto text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Our Products</h2>
-            <p class="text-base sm:text-lg text-gray-600 mb-12">Explore our diverse range of products and find exactly what you're looking for.</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Our Products</h2>
+            <p class="text-sm sm:text-ml text-gray-600 mb-12">Explore our diverse range of products and find exactly what you're looking for.</p>
         </div>
     </div>
-
     @livewire('search')
+
 
     <div class="container mx-auto py-12 max-w-7xl">
         @foreach ($categories as $category)
             <div class="mb-12" x-data="{ showMore: false }">
                 <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{{ $category->name }}</h3>
+                <p class="text-base sm:text-lg text-gray-600 mb-12">{{ $category->description }}</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
                     @foreach ($category->products->take(4) as $product)
                         <x-product-card :product="$product" />
@@ -48,7 +49,7 @@
                 @if ($category->products->count() > 4)
                     <div class="mt-4 flex justify-center">
                         <button @click="showMore = !showMore"
-                            class="px-4 sm:px-6 py-2 sm:py-3 bg-gray-300 text-gray-900 text-sm sm:text-base font-semibold rounded hover:bg-gray-400 transition duration-200">
+                            class="px-4 sm:px-6 py-2 sm:py-3 bg-gray-200 text-gray-900 text-sm sm:text-base font-semibold rounded hover:bg-gray-300 transition duration-200">
                             <span x-text="showMore ? 'Show Less' : 'Show More'"></span>
                         </button>
                     </div>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->boolean('status')->default(false);
             $table->string('thumbnail')->nullable();
-            $table->Integer('stock')->default(0);
+            $table->unsignedInteger('stock')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

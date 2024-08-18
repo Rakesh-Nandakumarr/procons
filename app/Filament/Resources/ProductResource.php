@@ -22,6 +22,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\Select;
 
 class ProductResource extends Resource
 {
@@ -39,7 +40,10 @@ class ProductResource extends Resource
                             ->label('Name')
                             ->required()
                             ->placeholder('Enter the product name')
-                            ->onBlur(fn (Forms\Components\TextInput $input) => $input->value(fn ($value) => Str::slug($value)))
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (\Filament\Forms\Set $set, $state) {
+                                $set('slug', Str::slug($state));
+                            })
                             ->autofocus(),
                         TextInput::make('slug')
                             ->label('Slug')
@@ -69,19 +73,28 @@ class ProductResource extends Resource
                     ->schema([
                         TextInput::make('price')
                             ->label('Price')
+                            ->numeric()
                             ->required()
                             ->placeholder('Enter the product price'),
                         TextInput::make('stock')
                             ->label('Stock')
+                            ->numeric()
                             ->required()
                             ->placeholder('Enter the product stock'),
                     ]),
-                Toggle::make('status')
-                    ->boolean()
-                    ->label('Status'),
+                Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        0 => 'Inactive',
+                        1 => 'Active',
+                    ])
+                    ->default(false),
+                Select::make('category_id')
+                    ->label('Category')
+                    ->relationship('category', 'name')
+                    ->required(),
                 FileUpload::make('thumbnail')
                     ->label('Thumbnail')
-                    ->required()
                     ->imagePreviewHeight('250')
                     ->enableDownload()
                     ->enableOpen(),
@@ -93,11 +106,14 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->primary()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')
                     ->searchable()
+                    ->sortable(),
+                TextColumn::make('description')
+                    ->searchable()
+                    ->limit(50)
                     ->sortable(),
                 BooleanColumn::make('status')
                     ->label('Status')
@@ -118,6 +134,7 @@ class ProductResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

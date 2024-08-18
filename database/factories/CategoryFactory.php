@@ -18,7 +18,6 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'slug' => $this->faker->slug,
             'description' => $this->faker->words(1000, true),
             'parent_id' => null,
             'status' => $this->faker->boolean(),
