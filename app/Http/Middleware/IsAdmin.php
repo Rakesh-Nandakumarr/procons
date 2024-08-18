@@ -15,10 +15,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // check if the user is an admin
-        if (auth()->user()->role == 'admin') {
-            return redirect()->route('home');
+        // check if the user is role is admin
+        if (auth()->user()->role != 'admin') {
+            return redirect()->route('home')->with('error', 'You are not authorized to access this page.');
+        } else {
+            return $next($request);
         }
-        return $next($request);
     }
 }

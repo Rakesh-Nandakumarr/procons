@@ -34,7 +34,7 @@ class Product extends Model
             return $this->thumbnail;
         }
 
-        return asset('storage/' . $this->thumbnail);
+        return asset('/storage/' . $this->thumbnail);
     }
 
     public function category(): BelongsTo
